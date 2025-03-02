@@ -1,6 +1,4 @@
-puts(100.upto(999).filter_map do |n|
-  100.upto(999).filter_map do |m|
-    prod = (m * n).to_s
-    m * n if prod == prod.reverse
-  end.max
-end.to_a.max)
+puts((100..999).to_a.repeated_combination(2).filter_map do |x, y|
+  prod = x * y
+  prod if prod.to_s == prod.to_s.reverse
+end.max)
