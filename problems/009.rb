@@ -1,7 +1,6 @@
-(1..).lazy.each do |a|
-  r = a.downto(0).filter do |b|
-    c = ((a**2) + (b**2))**0.5
-    [b, c] if (c % 1).zero?
+puts((1..500).lazy.flat_map do |a|
+  (a..500).lazy.map do |b|
+    c = 1000 - a - b
+    [a, b, c] if (a**2) + (b**2) == c**2
   end
-  p [a, r.to_a]
-end
+end.find(&:itself).reduce(:*))
