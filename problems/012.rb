@@ -1,15 +1,23 @@
 divisor_count = lambda { |n|
-  (1..n**0.5).filter_map do |a|
-    b, r = n.divmod a
-    (a == b ? 1 : 2) if r.zero?
-  end.sum
+  factors = 1
+  while n.even?
+    n /= 2
+    factors += 1
+  end
+
+  3.step((n**0.5).to_i, 2) do |divisor|
+    exponent = 1
+    while (n % divisor).zero?
+      n /= divisor
+      exponent += 1
+    end
+    factors *= exponent
+  end
+  factors *= 2 if n > 2
+  factors
 }
 
 puts (1..).lazy.filter_map { |n|
-  # The divisor function, D, is multiplicative for coprime numbers.
-  # Thus, we split the triangle number n * (n + 1) / 2 into two
-  # coprime factors: n / 2, n + 1 for even n and n, (n + 1) / 2
-  # for odd n.
   if n.even?
     d1 = divisor_count[n / 2]
     d2 = divisor_count[n + 1]
