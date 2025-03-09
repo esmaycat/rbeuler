@@ -7,4 +7,4 @@ collatz = lambda { |n|
   @memo[n] = chain + 1
 }
 
-p((1..1_000_000).max_by(&collatz))
+puts (1..1_000_000).max_by(&collatz)
