@@ -9,10 +9,5 @@ puts((1..1000).map do |n|
 
   next 11 if h == 10
 
-  s = t == 1 ? teens[o] : tens[t] + ones[o]
-  if h.zero?
-    s
-  else
-    s + (o.zero? && t.zero? ? 7 : 10) + ones[h]
-  end
+  (t == 1 ? teens[o] : tens[t] + ones[o]) + ((((o + t <=> 0) * 3) + 7 + ones[h]) * (h <=> 0))
 end.sum)
